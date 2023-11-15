@@ -1,0 +1,13 @@
+* rassemblement des robots -> hypothèse qu'ils peuvent tous communiquer
+=> incertitudes liées à la communication => revoir le travail fait sur la détection de bordures qui marchait assez bien
+
+* communication pour compter le nombre de robots -> tous les robots prennent connaissance de leurs voisins (id)
+
+* communication et consensus => attribution des coordonnées
+	-> premier arrivé premier servi ? dur niveau communication, incertitudes sur le bruit/réception des messages par les robots voisins
+		-> jouer sur le temps d'émission de msg? => aléatoire pour éviter une surcharge de msg, dans ce cas ça pourrait marcher
+	-> choix sur l'id du robot ? à ce moment-là autant attribuer les rôles aux robots à la main puisque le résultat sera toujours le même => pas super flexible sur le nombre de robots
+
+* dispersion en ligne
+
+* dispersion en grille
