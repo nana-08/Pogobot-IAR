@@ -11,3 +11,4 @@
 * dispersion en ligne
 
 * dispersion en grille
+commencer par un cluster puis robots s'éloignent peu à peu ?
