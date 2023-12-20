@@ -22,3 +22,9 @@ commencer par un cluster puis robots s'éloignent peu à peu ?
 	- SI reçoit le signal "Je suis immobile": s'arrête à côté du robot à l'arrêt et 	adopte la même orientation que lui (possible si le robot sait par quel capteur le 	message a été émis (doute là-dessus))
 
 -> commencer par un robot initial préalablement placé et qui reste statique
+
+
+## Algorithme (Beta) Wanderer
+- chaque robot effectue un déplacement aléatoire pendant un temps aléatoire pour explorer l'environnement
+- SI robot perçoit un voisin, il chercher à s'en éloigner
+- SI robot perçoit un obstacle, il cherche à s'en éloigner
