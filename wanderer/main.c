@@ -34,6 +34,27 @@ Yellow - 1 side
 #define motorThreeQuarter 716
 #define motorFull 1023
 
+void pogobot_motor_jump_set(int power, int motor) {
+    if (power > 512){
+        pogobot_motor_set(power, motor);
+    }
+    else{
+        pogobot_motor_set(512, motor);
+        msleep(50);
+        pogobot_motor_set(power, motor);
+    }
+}
+
+void pogobot_set_direction_right(int power) {
+    // pogobot_motor_set(0, motorR);
+    pogobot_motor_jump_set(power, motorL);
+}
+
+void pogobot_set_direction_left(int power) {
+    // pogobot_motor_set(0, motorL);
+    pogobot_motor_jump_set(power, motorR);
+}
+
 int main(void) {
 
     // Initialize the Pogobot - MANDATORY
@@ -62,14 +83,34 @@ int main(void) {
         int motor = rand()%2;
 
         // we choose a speed
-        int speed = motorQuarter;
+        int speed = 512;
 
-        pogobot_motor_set(motor, speed);
+        // if (motor == motorR){
+        //     printf("motor right\n");
+        //     pogobot_set_direction_right(speed);
+        //     int status = pogobot_motor_dir_status();
+        //     printf("status : %d\n", status);
+        // }
+        // else{
+        //     printf("motor left\n");
+        //     pogobot_set_direction_left(speed);
+        //     int status = pogobot_motor_dir_status();
+        //     printf("status : %d\n", status);
+        // }
+
+        pogobot_motor_jump_set(speed, motor);
+        // pogobot_motor_dir_set(speed, motor);
+        // int status = pogobot_motor_dir_status();
+        // printf("status : %d\n", status);
+        printf("motor : %d\n", motor);
 
         // we wait for the next iteration to start
         // prevent the Pogobot from going too fast
         t1=pogobot_stopwatch_get_elapsed_microseconds(&t0);
-        msleep( (1000000/F - t1)/1000 );
+        // we sleep for 2 seconds 
+        msleep(2000);
     }
 
 }
+
+
