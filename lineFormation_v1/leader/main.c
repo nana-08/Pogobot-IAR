@@ -40,7 +40,7 @@ int main(void) {
         pogobot_led_setColor(255,0,0);
         // send a message in every direction, with the id of the origin ir emitter
         pogobot_infrared_sendMessageAllDirectionWithId(0x1234, message, message_length_bytes);
-        printf("I am here!\n");
+        //printf("I am here!\n");
         pogobot_led_setColor(0,0,0);
 
         t1 = pogobot_stopwatch_get_elapsed_microseconds(&t0);
