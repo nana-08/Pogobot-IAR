@@ -6,3 +6,7 @@
 
 ## 2ème étape: Dispersion en ligne
 * Simulation sur Unity/Python
+* Implémentation d'un algorithme de dispersion en ligne:
+    - v1: avec un leader placé au préalable => lineFormation_v1
+    - v2: pas de leader préalablement placé
+    - v3: déplacement en gardant la forme de ligne ?
