@@ -15,11 +15,11 @@ commencer par un cluster puis robots s'éloignent peu à peu ?
 ## Algorithme (1) dispersion en ligne par tâtonnement
 - chaque robot effectue un tirage aléatoire pour s'arrêter
 - SI robot à l'arrêt:
-	- SI perçoit un voisin: émet un signal "Je suis immobile" dans les directions 	parallèles à la position de ce voisin
+	- SI perçoit un voisin: émet un signal "Je suis immobile" dans les directions parallèles à la position de ce voisin
 	- SI pas de voisin: émet un signal "Je suis immobile" dans toutes les directions
 	- SI pas de voisin pendant x temps: recommence à bouger
 - SI robot en mouvement:
-	- SI reçoit le signal "Je suis immobile": s'arrête à côté du robot à l'arrêt et 	adopte la même orientation que lui (possible si le robot sait par quel capteur le 	message a été émis (doute là-dessus))
+	- SI reçoit le signal "Je suis immobile": s'arrête à côté du robot à l'arrêt et adopte la même orientation que lui (possible si le robot sait par quel capteur le message a été émis (doute là-dessus))
 
 -> commencer par un robot initial préalablement placé et qui reste statique
 
