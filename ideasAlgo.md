@@ -12,7 +12,7 @@
 * dispersion en grille
 commencer par un cluster puis robots s'éloignent peu à peu ?
 
-## Algorithme (1) tâtonnement de dispersion en ligne
+## Algorithme (1) dispersion en ligne par tâtonnement
 - chaque robot effectue un tirage aléatoire pour s'arrêter
 - SI robot à l'arrêt:
 	- SI perçoit un voisin: émet un signal "Je suis immobile" dans les directions 	parallèles à la position de ce voisin
