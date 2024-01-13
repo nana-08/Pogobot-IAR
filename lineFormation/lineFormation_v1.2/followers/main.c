@@ -32,7 +32,7 @@ int main(void) {
     // Initialize the Pogobot - MANDATORY
     pogobot_init();
     printf("init ok\n");
-    msleep(1000);   // safe unplug
+    msleep(3000);   // safe unplug
     
 
     // First of all: motor calibration
