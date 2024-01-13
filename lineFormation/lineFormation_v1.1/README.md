@@ -5,3 +5,6 @@
 
 ## Problèmes
 toujours le même problème de déplacement, pas réglé même avec des mouvements par impulsions
+
+## Idée
+garder les impulsions mais utiliser kalman ---> v1.2

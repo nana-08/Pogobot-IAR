@@ -1,11 +1,11 @@
 BUILD_DIR=./build
-POGO_SDK=../../../sdk/build_sdk
+POGO_SDK=../../sdk/build_sdk
 
 POGO_SDK_TOOLS=$(POGO_SDK)/tools
 POGO_SDK_INCS=$(POGO_SDK)/includes
 POGO_SDK_LIBS=$(POGO_SDK)/libs
 
-POGO_VAR=../../../build/pogobotv3/software/include/generated
+POGO_VAR=../../build/pogobotv3/software/include/generated
 
 include $(POGO_VAR)/variables.mak
 include $(POGO_SDK_TOOLS)/common.mak
@@ -55,3 +55,4 @@ $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
 .PHONY: all clean connect
+
