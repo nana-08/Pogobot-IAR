@@ -20,19 +20,37 @@ Algorithm of line formation v1
 
 #define message_length_bytes 6
 #define tickMessage 2000000   // notify the environment every tickMessage microseconds -> when still
-#define tickWander 500000   // move for a short period of time then stop
+#define tickWander 1000000   // move for a short period of time then stop
 #define tick 2000000     // listen to the environment every tick microseconds -> when walking
 
-#define m motorQuarter  // motor power
+#define m motorHalf  // motor power
 
 #define WANDERING 0
 #define STILL 1
+
+#define STRAIGHT 0
+#define LEFT 1
+#define RIGHT 2
+
+
+void pogobot_motor_jump_set(int motor, int power) {
+  if (power > 512) {
+    pogobot_motor_set(motor, power);
+  } else {
+    pogobot_motor_set(motor, power);
+    msleep(50);
+    pogobot_motor_set(motor, power);
+  }
+}
+
 
 int main(void) {
 
     // Initialize the Pogobot - MANDATORY
     pogobot_init();
     printf("init ok\n");
+
+    srand(pogobot_helper_getRandSeed());
     
 
     int state = WANDERING;  // by default the robot starts walking
@@ -47,8 +65,8 @@ int main(void) {
     while (1){
 
         // stop and check your messages
-        pogobot_motor_set(0,0); //motorR
-        pogobot_motor_set(1,0); //motorL
+        pogobot_motor_jump_set(motorR, 0); //motorR
+        pogobot_motor_jump_set(motorL, 0); //motorL
 
         if (state == WANDERING){
             pogobot_stopwatch_reset(&t0);
@@ -95,21 +113,31 @@ int main(void) {
             else {  // no signal, the robot just moves for tickWander period of time then stops
                 printf("no signal\n");
 
-                pogobot_motor_set(0,m); //motorR
-                pogobot_motor_set(1,m); //motorL
-
                 time_reference_t t2;
                 pogobot_stopwatch_reset(&t2);
                 uint32_t t3;
                 while (1){
                     t3 = pogobot_stopwatch_get_elapsed_microseconds(&t2);
-                    if (t3 >= tickWander){
+                    if (t3 >= tick-tickWander){
                         break;
                     }
                 }
                 
-                pogobot_motor_set(0,0); //motorR
-                pogobot_motor_set(1,0); //motorL
+                // wandering
+                int direction = rand()%3;
+
+                if (direction == STRAIGHT){
+                    pogobot_motor_jump_set(motorR, m); //motorR
+                    pogobot_motor_jump_set(motorL, m); //motorL
+                } else {
+                    if (direction == LEFT){
+                        pogobot_motor_jump_set(motorL, m);
+                        pogobot_motor_jump_set(motorR, 0);
+                    } else {
+                        pogobot_motor_jump_set(motorL, 0);
+                        pogobot_motor_jump_set(motorR, m);
+                    }
+                }
             }
 
 

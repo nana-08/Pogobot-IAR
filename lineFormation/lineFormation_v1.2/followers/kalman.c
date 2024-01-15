@@ -271,13 +271,13 @@ void pogobot_quick_calibrate(int power, int* leftMotorVal, int* rightMotorVal) {
   pogobot_calibrate(power, 500, 750, 15, 50.0f, leftMotorVal, rightMotorVal);
 }
 
-void pogobot_motor_jump_set(int power, int motor) {
+void pogobot_motor_jump_set(int motor, int power) {
   if (power > 512) {
-    pogobot_motor_set(power, motor);
+    pogobot_motor_set(motor, power);
   } else {
-    pogobot_motor_set(512, motor);
+    pogobot_motor_set(motor, power);
     msleep(50);
-    pogobot_motor_set(power, motor);
+    pogobot_motor_set(motor, power);
   }
 }
 

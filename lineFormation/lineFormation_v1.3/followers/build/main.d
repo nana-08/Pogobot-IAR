@@ -24,7 +24,7 @@ build/main.o: main.c \
  /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/stdlib.h \
  /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/machine/stdlib.h \
  /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/alloca.h \
- ../../../sdk/build_sdk/includes/pogobot.h \
+ ../../../../sdk/build_sdk/includes/pogobot.h \
  /home/ubuntu/pogobot/dependencies/litex/litex/litex/soc/software/libbase/console.h \
  /home/ubuntu/pogobot/dependencies/litex/litex/litex/soc/software/libbase/uart.h \
  /home/ubuntu/pogobot/dependencies/litex/litex/litex/soc/cores/cpu/vexriscv/system.h \
@@ -44,19 +44,19 @@ build/main.o: main.c \
  /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/sys/_timespec.h \
  /home/ubuntu/pogobot/Software/build/pogobotv3/software/include/generated/mem.h \
  /home/ubuntu/pogobot/Software/build/pogobotv3/software/include/generated/git.h \
- ../../../sdk/build_sdk/includes/ts4231.h \
+ ../../../../sdk/build_sdk/includes/ts4231.h \
  /usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h \
- ../../../sdk/build_sdk/includes/ir_uart.h \
- ../../../sdk/build_sdk/includes/imu.h \
- ../../../sdk/build_sdk/includes/spi.h \
- ../../../sdk/build_sdk/includes/pogobot_timer_sleep_stopwatch.h \
- ../../../sdk/build_sdk/includes/pogobot_ir.h \
- ../../../sdk/build_sdk/includes/rgb.h \
- ../../../sdk/build_sdk/includes/FifoBuffer.h \
- ../../../sdk/build_sdk/includes/sleep.h \
- ../../../sdk/build_sdk/includes/adc.h \
- ../../../sdk/build_sdk/includes/slip.h \
- ../../../sdk/build_sdk/includes/release.h
+ ../../../../sdk/build_sdk/includes/ir_uart.h \
+ ../../../../sdk/build_sdk/includes/imu.h \
+ ../../../../sdk/build_sdk/includes/spi.h \
+ ../../../../sdk/build_sdk/includes/pogobot_timer_sleep_stopwatch.h \
+ ../../../../sdk/build_sdk/includes/pogobot_ir.h \
+ ../../../../sdk/build_sdk/includes/rgb.h \
+ ../../../../sdk/build_sdk/includes/FifoBuffer.h \
+ ../../../../sdk/build_sdk/includes/sleep.h \
+ ../../../../sdk/build_sdk/includes/adc.h \
+ ../../../../sdk/build_sdk/includes/slip.h \
+ ../../../../sdk/build_sdk/includes/release.h
 /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/tinystdio/stdio.h:
 /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/inttypes.h:
 /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/newlib.h:
@@ -82,7 +82,7 @@ build/main.o: main.c \
 /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/stdlib.h:
 /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/machine/stdlib.h:
 /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/alloca.h:
-../../../sdk/build_sdk/includes/pogobot.h:
+../../../../sdk/build_sdk/includes/pogobot.h:
 /home/ubuntu/pogobot/dependencies/litex/litex/litex/soc/software/libbase/console.h:
 /home/ubuntu/pogobot/dependencies/litex/litex/litex/soc/software/libbase/uart.h:
 /home/ubuntu/pogobot/dependencies/litex/litex/litex/soc/cores/cpu/vexriscv/system.h:
@@ -102,16 +102,16 @@ build/main.o: main.c \
 /home/ubuntu/pogobot/dependencies/litex/pythondata-software-picolibc/pythondata_software_picolibc/data/newlib/libc/include/sys/_timespec.h:
 /home/ubuntu/pogobot/Software/build/pogobotv3/software/include/generated/mem.h:
 /home/ubuntu/pogobot/Software/build/pogobotv3/software/include/generated/git.h:
-../../../sdk/build_sdk/includes/ts4231.h:
+../../../../sdk/build_sdk/includes/ts4231.h:
 /usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h:
-../../../sdk/build_sdk/includes/ir_uart.h:
-../../../sdk/build_sdk/includes/imu.h:
-../../../sdk/build_sdk/includes/spi.h:
-../../../sdk/build_sdk/includes/pogobot_timer_sleep_stopwatch.h:
-../../../sdk/build_sdk/includes/pogobot_ir.h:
-../../../sdk/build_sdk/includes/rgb.h:
-../../../sdk/build_sdk/includes/FifoBuffer.h:
-../../../sdk/build_sdk/includes/sleep.h:
-../../../sdk/build_sdk/includes/adc.h:
-../../../sdk/build_sdk/includes/slip.h:
-../../../sdk/build_sdk/includes/release.h:
+../../../../sdk/build_sdk/includes/ir_uart.h:
+../../../../sdk/build_sdk/includes/imu.h:
+../../../../sdk/build_sdk/includes/spi.h:
+../../../../sdk/build_sdk/includes/pogobot_timer_sleep_stopwatch.h:
+../../../../sdk/build_sdk/includes/pogobot_ir.h:
+../../../../sdk/build_sdk/includes/rgb.h:
+../../../../sdk/build_sdk/includes/FifoBuffer.h:
+../../../../sdk/build_sdk/includes/sleep.h:
+../../../../sdk/build_sdk/includes/adc.h:
+../../../../sdk/build_sdk/includes/slip.h:
+../../../../sdk/build_sdk/includes/release.h:

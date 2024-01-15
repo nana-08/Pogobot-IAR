@@ -34,15 +34,14 @@ Yellow - 1 side
 #define motorThreeQuarter 716
 #define motorFull 1023
 
-void pogobot_motor_jump_set(int power, int motor) {
-    if (power > 512){
-        pogobot_motor_set(power, motor);
-    }
-    else{
-        pogobot_motor_set(512, motor);
-        msleep(50);
-        pogobot_motor_set(power, motor);
-    }
+void pogobot_motor_jump_set(int motor, int power) {
+  if (power > 512) {
+    pogobot_motor_set(motor, power);
+  } else {
+    pogobot_motor_set(motor, power);
+    msleep(50);
+    pogobot_motor_set(motor, power);
+  }
 }
 
 void pogobot_set_direction_right(int power) {
