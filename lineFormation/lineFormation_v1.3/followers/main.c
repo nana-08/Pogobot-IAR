@@ -16,13 +16,14 @@ Algorithm of line formation v1
 #include <string.h>
 #include <stdlib.h>
 #include "pogobot.h"
-#include "kalman.h"
 
 
 #define message_length_bytes 6
 #define tickMessage 2000000   // notify the environment every tickMessage microseconds -> when still
 #define tickWander 500000   // move for a short period of time then stop
 #define tick 2000000     // listen to the environment every tick microseconds -> when walking
+
+#define m motorQuarter  // motor power
 
 #define WANDERING 0
 #define STILL 1
@@ -32,19 +33,7 @@ int main(void) {
     // Initialize the Pogobot - MANDATORY
     pogobot_init();
     printf("init ok\n");
-    msleep(3000);   // safe unplug
     
-
-    // First of all: motor calibration
-    int leftMotorVal;
-    int rightMotorVal;
-
-    pogobot_quick_calibrate(motorHalf, &leftMotorVal, &rightMotorVal);
-    pogobot_infrared_clear_message_queue();
-    pogobot_led_setColor(0,255,0);
-    msleep(500);
-    pogobot_led_setColor(0,0,0);
-
 
     int state = WANDERING;  // by default the robot starts walking
     ir_direction dir;   // the direction to emit when still
@@ -58,8 +47,8 @@ int main(void) {
     while (1){
 
         // stop and check your messages
-        pogobot_motor_set(motorL,0); //motorR
-        pogobot_motor_set(motorR,0); //motorL
+        pogobot_motor_set(0,0); //motorR
+        pogobot_motor_set(1,0); //motorL
 
         if (state == WANDERING){
             pogobot_stopwatch_reset(&t0);
@@ -76,42 +65,38 @@ int main(void) {
                 // get the ir emitter of the sender
                 int ir_emitter_id = mr.header._sender_ir_index;
                 // get the ir I received it on
-                int ir_receiver_id = mr.header._receiver_ir_index; 
-                // get the payload of the message
-                unsigned char *payload = mr.payload;
+                int ir_receiver_id = mr.header._receiver_ir_index;    
 
-                if (strcmp(payload, "still") == 0){
-                    // alignment: nothing too crazy here, just emit from the ir opposed to the receiving ir for now
-                    switch (ir_receiver_id)
-                    {
-                        case 0: // front => emit back
-                            printf("signal received on IR captor front\n");
-                            dir = 2;
-                            break;
-                        case 1: // right => emit left
-                            printf("signal received on IR captor right\n");
-                            dir = 3;
-                            break;
-                        case 2: // back => emit front
-                            printf("signal received on IR captor back\n");
-                            dir = 0;
-                            break;
-                        case 3: // left => emit right
-                            printf("signal received on IR captor left\n");
-                            dir = 1;
-                            break;
-                    }
+                // alignment: nothing too crazy here, just emit from the ir opposed to the receiving ir for now
+                switch (ir_receiver_id)
+                {
+                    case 0: // front => emit back
+                        printf("signal received on IR captor front\n");
+                        dir = 2;
+                        break;
+                    case 1: // right => emit left
+                        printf("signal received on IR captor right\n");
+                        dir = 3;
+                        break;
+                    case 2: // back => emit front
+                        printf("signal received on IR captor back\n");
+                        dir = 0;
+                        break;
+                    case 3: // left => emit right
+                        printf("signal received on IR captor left\n");
+                        dir = 1;
+                        break;
+                }
 
-                    // no longer wandering
-                    state = STILL;
-                    printf("state => still\n");
-                }  
+                // no longer wandering
+                state = STILL;
+                printf("state => still\n");
             } 
             else {  // no signal, the robot just moves for tickWander period of time then stops
                 printf("no signal\n");
 
-                pogobot_motor_jump_set(motorL, leftMotorVal);
-                pogobot_motor_jump_set(motorR, rightMotorVal); 
+                pogobot_motor_set(0,m); //motorR
+                pogobot_motor_set(1,m); //motorL
 
                 time_reference_t t2;
                 pogobot_stopwatch_reset(&t2);
@@ -123,8 +108,8 @@ int main(void) {
                     }
                 }
                 
-                pogobot_motor_set(motorL,0);
-                pogobot_motor_set(motorR,0); 
+                pogobot_motor_set(0,0); //motorR
+                pogobot_motor_set(1,0); //motorL
             }
 
 
