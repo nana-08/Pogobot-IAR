@@ -57,7 +57,7 @@ int main(void) {
     pogobot_infrared_set_power( pogobot_infrared_emitter_power_twoThird );
     unsigned char message[] = "still";
 
-    int last_tick_direction = STRAIGHT;
+    int last_tick_direction = STRAIGHT;                              
     time_reference_t t0;
     uint32_t t1;
     while (1){

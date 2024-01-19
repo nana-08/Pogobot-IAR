@@ -6,4 +6,3 @@ RESUME DES VERSIONS:
 - 1.2:
 - 1.3:
 - 1.4: retrait du tick + contrôle des demi-tours
-- 1.5: émission des messages IR dans la continuation de la ligne
