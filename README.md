@@ -10,3 +10,5 @@
     - v1: avec un leader placé au préalable => lineFormation_v1
     - v2: pas de leader préalablement placé
     - v3: déplacement en gardant la forme de ligne ?
+* Implémentation d'un algorithme de dispersion en grille:
+    - même comportement que les lignes
