@@ -119,7 +119,7 @@ int main(void) {
                     direction = STRAIGHT;
                 }
                 
-                // for debug purpose we color the robot depending on the direction it takes
+                // for debug purpose, we color the robot depending on the direction it takes
 
                 // straight -> green
                 // left -> blue
@@ -142,8 +142,9 @@ int main(void) {
                 }
             }
 
-            pogobot_led_setColor(0,0,255);
-            pogobot_led_setColor(0,0,0);
+            // j'ai commenté ça pour que l'on vois la couleur direction du robot dsl si il fallais pas :(
+            // pogobot_led_setColor(0,0,255);
+            // pogobot_led_setColor(0,0,0);
 
             t1 = pogobot_stopwatch_get_elapsed_microseconds(&t0);
             msleep((tick - t1)/1000);   // msleep in milliseconds
