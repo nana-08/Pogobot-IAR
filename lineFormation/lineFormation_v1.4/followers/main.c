@@ -118,17 +118,26 @@ int main(void) {
                 if (((last_tick_direction == LEFT) && (direction == LEFT)) || ((last_tick_direction == RIGHT) && (direction == RIGHT))){
                     direction = STRAIGHT;
                 }
+                
+                // for debug purpose we color the robot depending on the direction it takes
+
+                // straight -> green
+                // left -> blue
+                // right -> red
 
                 if (direction == STRAIGHT){
                     pogobot_motor_jump_set(motorR, m); //motorR
                     pogobot_motor_jump_set(motorL, m); //motorL
+                    pogobot_led_setColor(0,255,0);
                 } else {
                     if (direction == LEFT){
                         pogobot_motor_jump_set(motorL, m);
                         pogobot_motor_jump_set(motorR, 0);
+                        pogobot_led_setColor(0,0,255);
                     } else {
                         pogobot_motor_jump_set(motorL, 0);
                         pogobot_motor_jump_set(motorR, m);
+                        pogobot_led_setColor(255,0,0);
                     }
                 }
             }
