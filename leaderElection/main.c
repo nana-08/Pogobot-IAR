@@ -13,7 +13,7 @@ Algorithm of election of a leader
     - the election happens in 3 rounds
     - every robot stores a list of random picks
     - each round, robots pick a random number between 1 and 10 and stores it in a list of picks
-    - at the end of the three rounds, each robot computes its score, i.e the total difference between its picks. 
+    - at the end of the three rounds, each robot computes its score, i.e the weighted sum of its picks. 
     The leader is chosen as the robot with the smallest difference between the three random picks
 */
 
@@ -39,7 +39,7 @@ int main(void) {
     srand(pogobot_helper_getRandSeed());
 
     int i = 0;
-    int randomPicks[] = [0,0,0];
+    int randomPicks[] = {0,0,0};
     int state = FOLLOWER;   // before the election
                            
     time_reference_t t0;
@@ -48,23 +48,18 @@ int main(void) {
         
         if (i < rounds){
             randomPicks[i]= rand()%10;
+            printf("random pick %d: %d\n", i, randomPicks[i]);
             i++;
         } else {
-            if (i==3){
+            if (i == rounds){
                 // send the score
-                int score = randomPicks[0]-randomPicks[1];
-                if (score < 0){
-                    score = score - 2*score;
-                }
-                int score2 = randomPicks[1]-randomPicks[2];
-                if (score2 < 0){
-                    score2 = score2 - 2*score2;
-                }
-                score = score + score2;
+                int score = 3*randomPicks[0] + 2*randomPicks[1] + randomPicks[2];
 
-
+                printf("score = %d\n", score);
+                state = LEADER;
+                i++;
             } else {
-                if (state = LEADER){
+                if (state == LEADER){
                     pogobot_led_setColor(255,0,0);
                 } else {
                     pogobot_led_setColor(0,0,255);
