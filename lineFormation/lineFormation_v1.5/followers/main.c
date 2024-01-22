@@ -19,7 +19,7 @@ Algorithm of line formation v1
 
 
 #define message_length_bytes 6
-#define tickMessage 2000000   // notify the environment every tickMessage microseconds -> when still
+#define tickMessage 1000000   // notify the environment every tickMessage microseconds -> when still
 #define tick 500000     // listen to the environment every tick microseconds -> when walking
 
 #define m motorThreeQuarter  // motor power
@@ -52,9 +52,10 @@ int main(void) {
 
     int state = WANDERING;  // by default the robot starts walking
     ir_direction dir;   // the direction to emit when still
+    ir_direction ackDir;   // the direction to emit when still and answering to the robot we follow
 
     // signal to send as the leader
-    pogobot_infrared_set_power( pogobot_infrared_emitter_power_twoThird );
+    pogobot_infrared_set_power( pogobot_infrared_emitter_power_oneThird );
     unsigned char message[] = "still";
 
     int last_tick_direction = STRAIGHT;                              
@@ -106,6 +107,8 @@ int main(void) {
                             dir = 1;
                             break;
                     }
+
+                    ackDir = ir_receiver_id;
 
                     // no longer wandering
                     state = STILL;
@@ -159,6 +162,7 @@ int main(void) {
 
             pogobot_led_setColor(255,0,0);
             pogobot_infrared_sendMessageOneDirection(dir, 0x1234, message, message_length_bytes);
+            pogobot_infrared_sendMessageOneDirection(ackDir, 0x1234, message, message_length_bytes);
             //printf("I am here!\n");
             pogobot_led_setColor(0,0,0);
 

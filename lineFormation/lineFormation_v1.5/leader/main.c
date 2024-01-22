@@ -18,7 +18,7 @@ Algorithm of line formation v1
 
 
 #define message_length_bytes 6
-#define tick 2000000   // the leader will notify the environment every tick microseconds
+#define tick 1000000   // the leader will notify the environment every tick microseconds
 
 
 int main(void) {
@@ -28,20 +28,15 @@ int main(void) {
     printf("init ok\n");
     
 
+    ir_direction dir;   // direction to emit in
     // signal to send as the leader
-    pogobot_infrared_set_power( pogobot_infrared_emitter_power_twoThird );
+    pogobot_infrared_set_power( pogobot_infrared_emitter_power_oneThird );
     unsigned char message[] = "still";
 
     time_reference_t t0;
     uint32_t t1;
     while (1){
         pogobot_stopwatch_reset(&t0);
-
-        pogobot_led_setColor(255,0,0);
-        // send a message in every direction, with the id of the origin ir emitter
-        pogobot_infrared_sendMessageAllDirectionWithId(0x1234, message, message_length_bytes);
-        //printf("I am here!\n");
-        pogobot_led_setColor(0,0,0);
 
         // listen to signals:
         pogobot_infrared_update();
@@ -60,8 +55,11 @@ int main(void) {
             // get the payload of the message
             unsigned char *payload = mr.payload;
 
+
+            // if someone is following the leader, it starts emitting in only one direction. Else it emits in all directions
             if (strcmp(payload, "still") == 0) {
                 
+                pogobot_led_setColor(0,255,0);
                 switch (ir_receiver_id)
                 {
                     case 0: // front => emit back
@@ -81,8 +79,22 @@ int main(void) {
                         dir = 1;
                         break;
                 }
+
+                pogobot_infrared_sendMessageOneDirection(dir, 0x1234, message, message_length_bytes);
+            } else {
+                pogobot_led_setColor(255,0,0);
+                // send a message in every direction, with the id of the origin ir emitter
+                pogobot_infrared_sendMessageAllDirectionWithId(0x1234, message, message_length_bytes);
+                //printf("I am here!\n");
             }
+        } else {
+            pogobot_led_setColor(255,0,0);
+            // send a message in every direction, with the id of the origin ir emitter
+            pogobot_infrared_sendMessageAllDirectionWithId(0x1234, message, message_length_bytes);
+            //printf("I am here!\n");
         }
+
+        pogobot_led_setColor(0,0,0);
 
         t1 = pogobot_stopwatch_get_elapsed_microseconds(&t0);
         msleep((tick - t1)/1000);   // msleep in milliseconds
