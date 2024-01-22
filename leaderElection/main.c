@@ -36,8 +36,6 @@ int main(void) {
     pogobot_init();
     printf("init ok\n");
 
-    srand(pogobot_helper_getRandSeed());
-
     int i = 0;
     int randomPicks[] = {0,0,0};
     int state = FOLLOWER;   // before the election
@@ -47,7 +45,7 @@ int main(void) {
     while (1){
         
         if (i < rounds){
-            randomPicks[i]= rand()%10;
+            randomPicks[i]= rand()%1000;
             printf("random pick %d: %d\n", i, randomPicks[i]);
             i++;
         } else {
