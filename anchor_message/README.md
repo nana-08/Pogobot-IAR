@@ -13,8 +13,5 @@ L'utilisation des pogobots pose des défis significatifs pour la mise en œuvre 
 
 Un obstacle supplémentaire réside dans **l'absence d'évaluation de la distance entre les robots**. Certains robots peuvent se rapprocher excessivement des "*anchors*", tandis que d'autres peuvent rester éloignés, perturbant ainsi la formation d'un carré avec une boucle de message correcte. La précision de la direction dans l'envoi des messages n'étant pas parfaite, les robots risquent fortement de ne pas être en mesure de former un carré parfait, compromettant ainsi le succès de l'algorithme.
 
-## 💡 Idées
-**changer de robots** 🤣
-
 ## 📱 Visualisation
 ![alt text](explication_anchor_message.png "Logo Title Text 1")
