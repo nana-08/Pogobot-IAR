@@ -73,46 +73,60 @@ int main(void) {
             pogobot_infrared_update();
             // if it hears a signal it tries to align with the emitter
             if ( pogobot_infrared_message_available() ) {
-                message_t mr;
-                // get the next message in the buffer and store it in mr
-                pogobot_infrared_recover_next_message(&mr);
-                
-                // get the sender id of the message
-                int sender_id = mr.header._sender_id;  
-                // get the ir emitter of the sender
-                int ir_emitter_id = mr.header._sender_ir_index;
-                // get the ir I received it on
-                int ir_receiver_id = mr.header._receiver_ir_index;    
-                // get the payload of the message
-                unsigned char *payload = mr.payload;
 
-                if (strcmp(payload, "still") == 0){
-                    // alignment: nothing too crazy here, just emit from the ir opposed to the receiving ir for now
-                    switch (ir_receiver_id)
-                    {
-                        case 0: // front => emit back
-                            printf("signal received on IR captor front\n");
-                            dir = 2;
-                            break;
-                        case 1: // right => emit left
-                            printf("signal received on IR captor right\n");
-                            dir = 3;
-                            break;
-                        case 2: // back => emit front
-                            printf("signal received on IR captor back\n");
-                            dir = 0;
-                            break;
-                        case 3: // left => emit right
-                            printf("signal received on IR captor left\n");
-                            dir = 1;
-                            break;
+                // controling the messages 
+                // we do not want to take into account the messages received on a diagonal, i.e by 2 different captors
+                int sender_id, ir_emitter_id, ir_receiver_id;
+                unsigned char *payload;
+                int nb_msg = 0;
+                for (int i=0;i<2;i++){
+                    if (pogobot_infrared_message_available()){
+                        message_t mr;
+                        // get the next message in the buffer and store it in mr
+                        pogobot_infrared_recover_next_message(&mr);
+                        
+                        // get the sender id of the message
+                        sender_id = mr.header._sender_id;  
+                        // get the ir emitter of the sender
+                        ir_emitter_id = mr.header._sender_ir_index;
+                        // get the ir I received it on
+                        ir_receiver_id = mr.header._receiver_ir_index;    
+                        // get the payload of the message
+                        *payload = mr.payload;
+
+                        nb_msg++;
                     }
+                }
 
-                    ackDir = ir_receiver_id;
+                if (nb_msg == 1){
+                    if (strcmp(payload, "still") == 0){
+                        // alignment: nothing too crazy here, just emit from the ir opposed to the receiving ir for now
+                        switch (ir_receiver_id)
+                        {
+                            case 0: // front => emit back
+                                printf("signal received on IR captor front\n");
+                                dir = 2;
+                                break;
+                            case 1: // right => emit left
+                                printf("signal received on IR captor right\n");
+                                dir = 3;
+                                break;
+                            case 2: // back => emit front
+                                printf("signal received on IR captor back\n");
+                                dir = 0;
+                                break;
+                            case 3: // left => emit right
+                                printf("signal received on IR captor left\n");
+                                dir = 1;
+                                break;
+                        }
 
-                    // no longer wandering
-                    state = STILL;
-                    printf("state => still\n");
+                        ackDir = ir_receiver_id;
+
+                        // no longer wandering
+                        state = STILL;
+                        printf("state => still\n");
+                    }
                 } 
             } 
             else {  // no signal, the robot just moves for tickWander period of time then stops
