@@ -26,6 +26,8 @@ Algorithm of line formation v1
 
 #define WANDERING 0
 #define STILL 1
+#define STILL_1NEIGHBOR 2   // blue led
+#define STILL_2NEIGHBORS 3  // red led
 
 #define STRAIGHT 0
 #define LEFT 1

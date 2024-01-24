@@ -158,6 +158,7 @@ int main(void) {
             pogobot_stopwatch_reset(&t0);
 
             pogobot_led_setColor(255,0,0);
+            printf("j'envoie un msg dans la direction %d\n", dir);
             pogobot_infrared_sendMessageOneDirection(dir, 0x1234, message, message_length_bytes);
             //printf("I am here!\n");
             pogobot_led_setColor(0,0,0);

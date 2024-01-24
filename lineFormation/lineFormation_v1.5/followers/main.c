@@ -79,6 +79,7 @@ int main(void) {
                 int sender_id, ir_emitter_id, ir_receiver_id;
                 unsigned char *payload;
                 int nb_msg = 0;
+                int saved_sender = -1;
                 for (int i=0;i<2;i++){
                     if (pogobot_infrared_message_available()){
                         message_t mr;
@@ -86,13 +87,20 @@ int main(void) {
                         pogobot_infrared_recover_next_message(&mr);
                         
                         // get the sender id of the message
-                        sender_id = mr.header._sender_id;  
+                        sender_id = mr.header._sender_id; 
+
+                        if (sender_id == saved_sender){
+                            break;
+                        } 
+
+                        saved_sender = sender_id;
                         // get the ir emitter of the sender
                         ir_emitter_id = mr.header._sender_ir_index;
                         // get the ir I received it on
                         ir_receiver_id = mr.header._receiver_ir_index;    
                         // get the payload of the message
-                        *payload = mr.payload;
+                        payload = mr.payload;
+
 
                         nb_msg++;
                     }
@@ -122,7 +130,7 @@ int main(void) {
                         }
 
                         ackDir = ir_receiver_id;
-                        pogobot_infrared_sendMessageOneDirection(ackDir, 0x1234, message, message_length_bytes);
+                        
 
                         // no longer wandering
                         state = STILL;
@@ -174,8 +182,10 @@ int main(void) {
         else {  // state = STILL
             // same behavior as the leader except for the directions of the messages
             pogobot_stopwatch_reset(&t0);
+            printf("j'envoie dans la direction %d\n", dir);
 
             pogobot_led_setColor(255,0,0);
+            pogobot_infrared_sendMessageOneDirection(ackDir, 0x1234, message, message_length_bytes);
             pogobot_infrared_sendMessageOneDirection(dir, 0x1234, message, message_length_bytes);
             //printf("I am here!\n");
             pogobot_led_setColor(0,0,0);
